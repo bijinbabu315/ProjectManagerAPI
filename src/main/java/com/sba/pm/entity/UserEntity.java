@@ -1,20 +1,24 @@
 package com.sba.pm.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
 
 @Entity
 @Table(name="user")
 public class UserEntity {
+;
+
 	@Id
 	@Column(name="user_id")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
 	@Column(name="firstname")
@@ -26,11 +30,11 @@ public class UserEntity {
 	@Column(name="emp_id")
 	private String employeeId;
 	
-	@ManyToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="project_id")
 	private ProjectEntity projectEntity;
 	
-	@ManyToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="task_id")
 	private TaskEntity taskEntity;
 
@@ -70,15 +74,17 @@ public class UserEntity {
 		return projectEntity;
 	}
 
-	public void setProject(ProjectEntity projectEntity) {
+	public void setProjectEntity(ProjectEntity projectEntity) {
 		this.projectEntity = projectEntity;
 	}
 
-	public TaskEntity getTask() {
+	public TaskEntity getTaskEntity() {
 		return taskEntity;
 	}
 
-	public void setTask(TaskEntity taskEntity) {
+	public void setTaskEntity(TaskEntity taskEntity) {
 		this.taskEntity = taskEntity;
 	}
+
+
 }

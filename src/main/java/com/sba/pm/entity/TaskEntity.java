@@ -2,6 +2,7 @@ package com.sba.pm.entity;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,24 +10,28 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="task")
+@JsonIgnoreProperties(value = { "userEntity" }, allowSetters = true)
 public class TaskEntity {
 
 		@Id
 		@Column(name="task_id")
-		@GeneratedValue(strategy = GenerationType.AUTO)
+		@GeneratedValue(strategy = GenerationType.IDENTITY )
 		private Integer id;
 		
-		@ManyToOne
+		@ManyToOne(cascade = CascadeType.ALL)
 		@JoinColumn(name="parent_id")
-		private ParentTaskEntity parentTaskEntity;
+		private ParentTaskEntity parentTask;
 		
-		@ManyToOne
+		@ManyToOne(cascade = CascadeType.ALL, optional = false)
 		@JoinColumn(name="project_id")
-		private ParentTaskEntity project;
+		private ProjectEntity project;
 		
 		@Column(name="task")
 		private String task;
@@ -37,11 +42,14 @@ public class TaskEntity {
 		@Column(name="end_dt")
 		private Date endDate;
 		
-		@Column(name="priorty")
-		private Integer priorty;
+		@Column(name="priority")
+		private Integer priority;
 		
 		@Column(name="status")
 		private Integer status;
+		
+		@OneToOne(mappedBy = "taskEntity")
+		private UserEntity userEntity;
 
 		public Integer getId() {
 			return id;
@@ -52,19 +60,19 @@ public class TaskEntity {
 		}
 
 		public ParentTaskEntity getParentTask() {
-			return parentTaskEntity;
+			return parentTask;
 		}
 
-		public void setParentTask(ParentTaskEntity parentTaskEntity) {
-			this.parentTaskEntity = parentTaskEntity;
+		public void setParentTask(ParentTaskEntity parentTask) {
+			this.parentTask = parentTask;
 		}
 
-		public ParentTaskEntity getProject() {
+		public ProjectEntity getProject() {
 			return project;
 		}
 
-		public void setProject(ParentTaskEntity project) {
-			this.project = project;
+		public void setProject(ProjectEntity projectEntity) {
+			this.project = projectEntity;
 		}
 
 		public String getTask() {
@@ -91,12 +99,12 @@ public class TaskEntity {
 			this.endDate = endDate;
 		}
 
-		public Integer getPriorty() {
-			return priorty;
+		public Integer getPriority() {
+			return priority;
 		}
 
-		public void setPriorty(Integer priorty) {
-			this.priorty = priorty;
+		public void setPriority(Integer priority) {
+			this.priority = priority;
 		}
 
 		public Integer getStatus() {
@@ -105,5 +113,13 @@ public class TaskEntity {
 
 		public void setStatus(Integer status) {
 			this.status = status;
+		}
+
+		public UserEntity getUserEntity() {
+			return userEntity;
+		}
+
+		public void setUserEntity(UserEntity user) {
+			this.userEntity = user;
 		}
 }
