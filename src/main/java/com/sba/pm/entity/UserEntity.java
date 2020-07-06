@@ -7,14 +7,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="user")
 public class UserEntity {
-;
 
 	@Id
 	@Column(name="user_id")
@@ -30,13 +31,26 @@ public class UserEntity {
 	@Column(name="emp_id")
 	private String employeeId;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="project_id")
-	private ProjectEntity projectEntity;
+	@JsonIgnoreProperties(value = { "user", "task" }, allowSetters = true)
+	private ProjectEntity projectData;
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="task_id")
+	@JsonIgnoreProperties(value = { "userEntity", "project" }, allowSetters = true)
 	private TaskEntity taskEntity;
+	
+	@Column(name="isManager")
+	private Integer isManager;
+
+	public Integer getIsManager() {
+		return isManager;
+	}
+
+	public void setIsManager(Integer isManager) {
+		this.isManager = isManager;
+	}
 
 	public Integer getId() {
 		return id;
@@ -70,12 +84,12 @@ public class UserEntity {
 		this.employeeId = employeeId;
 	}
 
-	public ProjectEntity getProject() {
-		return projectEntity;
+	public ProjectEntity getProjectData() {
+		return projectData;
 	}
 
-	public void setProjectEntity(ProjectEntity projectEntity) {
-		this.projectEntity = projectEntity;
+	public void setProjectData(ProjectEntity projectData) {
+		this.projectData = projectData;
 	}
 
 	public TaskEntity getTaskEntity() {
@@ -85,6 +99,8 @@ public class UserEntity {
 	public void setTaskEntity(TaskEntity taskEntity) {
 		this.taskEntity = taskEntity;
 	}
+
+
 
 
 }

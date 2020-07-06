@@ -36,7 +36,8 @@ public class TaskDaoImpl implements ITaskDao {
 			session=sessionFactory.openSession();
 			Transaction beginTransaction = session.beginTransaction();
 			session.saveOrUpdate(taskEntity);
-			result = 1;
+			session.flush();
+			result = taskEntity.getId();
 			beginTransaction.commit();
 		} catch (Exception e) {
 			result = 0;

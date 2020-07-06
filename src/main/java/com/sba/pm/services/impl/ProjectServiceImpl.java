@@ -22,12 +22,13 @@ public class ProjectServiceImpl implements IProjectService {
 	private UserDaoImpl userDaoImpl;
 
 	@Override
-	public Integer saveOrUpadte(ProjectEntity project) {
-		Integer result = projectDao.saveOrUpadte(project);
-		if( result > 0 && project.getUserEntity() != null) {
-		UserEntity userEntity = project.getUserEntity();
-		userEntity.setProjectEntity(project);
-		userDaoImpl.saveOrUpadte(userEntity);
+	public Integer saveOrUpdateProject(ProjectEntity project) {
+		Integer result = projectDao.saveOrUpdateProject(project);
+		if( result > 0 && project.getUser() != null) {
+		UserEntity userEntity = project.getUser().get(0);
+		userEntity.setProjectData(project);
+		userEntity.setIsManager(1);
+		userDaoImpl.saveOrUpdateUser(userEntity);
 		}
 		
 		return result;

@@ -23,7 +23,7 @@ public class UserController {
 	
 	@PostMapping("/user/saveOrUpdateUser")
 	public Integer createOrUpdate(@RequestBody UserEntity userEntity) {
-		return userService.saveOrUpadte(userEntity);
+		return userService.saveOrUpdateUser(userEntity);
 	}
 	
 	@GetMapping("/user/getUser/{id}")
@@ -43,4 +43,5 @@ public class UserController {
 	public Integer deleteUser(@PathVariable String id) {
 		return userService.deleteUser(Integer.parseInt(id));
 	}
+
 }

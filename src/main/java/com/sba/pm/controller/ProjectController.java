@@ -22,9 +22,9 @@ public class ProjectController {
 	@Autowired
 	private ProjectServiceImpl projectService;
 	
-	@PostMapping("/project/saveorupdate")
-	public void createOrUpdate(@RequestBody ProjectEntity projectEntity) {
-		projectService.saveOrUpadte(projectEntity);
+	@PostMapping("/project/saveOrUpdateProject")
+	public Integer createOrUpdate(@RequestBody ProjectEntity projectEntity) {
+		return projectService.saveOrUpdateProject(projectEntity);
 	}
 	
 	@GetMapping("/project/getProject/{id}")

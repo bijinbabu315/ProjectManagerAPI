@@ -51,4 +51,5 @@ public class ParentTaskEntity {
 	public void setTaskEntity(List<TaskEntity> taskEntity) {
 		this.taskEntity = taskEntity;
 	}
+
 }

@@ -26,14 +26,11 @@ public class TaskServiceImpl implements ITaskService {
 	
 	@Override
 	public Integer saveOrUpadte(TaskEntity taskEntity) {
-		ProjectEntity projectEntity = taskEntity.getProject();
 		Integer result = taskDao.saveOrUpadte(taskEntity);
-		UserEntity userEntity = taskEntity.getUserEntity();
-		if(result > 0 && userEntity!= null) {
-			userEntity.setTaskEntity(taskEntity);
-			userEntity.setProjectEntity(projectEntity);
-			userDao.saveOrUpadte(userEntity);
-		}
+//		UserEntity userEntity = taskEntity.getUserEntity();
+//		if(result > 0 && userEntity!= null) {
+//			userDao.updateTask(taskEntity);
+//		}
 		return result;
 	}
 

@@ -17,7 +17,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="task")
-@JsonIgnoreProperties(value = { "userEntity" }, allowSetters = true)
 public class TaskEntity {
 
 		@Id
@@ -29,8 +28,9 @@ public class TaskEntity {
 		@JoinColumn(name="parent_id")
 		private ParentTaskEntity parentTask;
 		
-		@ManyToOne(cascade = CascadeType.ALL, optional = false)
+		@ManyToOne(cascade = CascadeType.ALL)
 		@JoinColumn(name="project_id")
+		@JsonIgnoreProperties(value = { "user", "task" }, allowSetters = true)
 		private ProjectEntity project;
 		
 		@Column(name="task")
@@ -49,6 +49,7 @@ public class TaskEntity {
 		private Integer status;
 		
 		@OneToOne(mappedBy = "taskEntity")
+		@JsonIgnoreProperties(value = { "userEntity", "taskEntity" }, allowSetters = true)
 		private UserEntity userEntity;
 
 		public Integer getId() {
@@ -71,8 +72,8 @@ public class TaskEntity {
 			return project;
 		}
 
-		public void setProject(ProjectEntity projectEntity) {
-			this.project = projectEntity;
+		public void setProject(ProjectEntity project) {
+			this.project = project;
 		}
 
 		public String getTask() {
@@ -119,7 +120,9 @@ public class TaskEntity {
 			return userEntity;
 		}
 
-		public void setUserEntity(UserEntity user) {
-			this.userEntity = user;
+		public void setUserEntity(UserEntity userEntity) {
+			this.userEntity = userEntity;
 		}
+
+	
 }

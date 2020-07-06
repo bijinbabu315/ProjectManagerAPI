@@ -5,7 +5,7 @@ import java.util.List;
 import com.sba.pm.entity.UserEntity;
 
 public interface IUserDao {
-	public Integer saveOrUpadte(UserEntity user);
+	public Integer saveOrUpdateUser(UserEntity user);
 
 	public UserEntity getUser(Integer id);
 

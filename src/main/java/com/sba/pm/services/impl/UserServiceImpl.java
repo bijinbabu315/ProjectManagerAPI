@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sba.pm.dao.impl.UserDaoImpl;
+import com.sba.pm.entity.TaskEntity;
 import com.sba.pm.entity.UserEntity;
 import com.sba.pm.services.intf.IUserService;
 
@@ -16,8 +17,8 @@ public class UserServiceImpl implements IUserService {
 	UserDaoImpl userDao;
 
 	@Override
-	public Integer saveOrUpadte(UserEntity user) {
-		return userDao.saveOrUpadte(user);
+	public Integer saveOrUpdateUser(UserEntity user) {
+		return userDao.saveOrUpdateUser(user);
 	}
 
 	@Override
@@ -34,4 +35,5 @@ public class UserServiceImpl implements IUserService {
 	public Integer deleteUser(Integer id) {
 		return userDao.deleteUser(id);
 	}
+
 }
