@@ -22,13 +22,10 @@ public class TaskController {
 	
 	@Autowired
 	private TaskServiceImpl taskService;
-	@Autowired
-	private  ParentTaskServiceImpl parentTaskService;
 
-	@PostMapping("/task/saveorupdate")
+	@PostMapping("/task/saveOrUpdateTask")
 	public Integer createOrUpdate(@RequestBody TaskEntity task) {
-//		task.setParentTask(parentTaskService.getParentTask(Integer.parseInt(task.getParentTask())));
-		return taskService.saveOrUpadte(task);
+		return taskService.saveOrUpdateTask(task);
 	}
 	
 	@GetMapping("/task/getTask/{id}")
@@ -40,12 +37,12 @@ public class TaskController {
 	
 	@GetMapping("/task/getAllTasks")
 	public List<TaskEntity> getAllTasks(){
-		return taskService.view();
+		return taskService.getAllTasks();
 		
 	}
 	
-	@DeleteMapping("/task/delete/{id}")
+	@DeleteMapping("/task/deleteTask/{id}")
 	public Integer deleteTask(@PathVariable String id) {
-		return taskService.delete(Integer.parseInt(id));
+		return taskService.deleteTask(Integer.parseInt(id));
 	}
 }

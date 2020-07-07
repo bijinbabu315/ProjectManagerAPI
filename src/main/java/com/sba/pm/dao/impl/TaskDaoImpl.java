@@ -28,7 +28,7 @@ public class TaskDaoImpl implements ITaskDao {
 	private EntityManagerFactory entityManagerFactory;
 	
 	@Override
-	public Integer saveOrUpadte(TaskEntity taskEntity) {
+	public Integer saveOrUpdateTask(TaskEntity taskEntity) {
 		Integer result=0;
 		SessionFactory sessionFactory = entityManagerFactory.unwrap(SessionFactory.class);
 		Session session=null;
@@ -69,7 +69,7 @@ public class TaskDaoImpl implements ITaskDao {
 	}
 
 	@Override
-	public List<TaskEntity> view() {
+	public List<TaskEntity> getAllTasks() {
 		List<TaskEntity> results=new ArrayList<>();
 		SessionFactory sessionFactory = entityManagerFactory.unwrap(SessionFactory.class);
 		Session session=null;
@@ -93,7 +93,7 @@ public class TaskDaoImpl implements ITaskDao {
 	}
 
 	@Override
-	public Integer delete(Integer id) {
+	public Integer deleteTask(Integer id) {
 		SessionFactory sessionFactory = entityManagerFactory.unwrap(SessionFactory.class);
 		Session session=null;
 		try {

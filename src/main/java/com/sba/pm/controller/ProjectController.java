@@ -40,7 +40,7 @@ public class ProjectController {
 		
 	}
 	
-	@DeleteMapping("/project/delete/{id}")
+	@DeleteMapping("/project/deleteProject/{id}")
 	public Integer deleteProject(@PathVariable String id) {
 		return projectService.delete(Integer.parseInt(id));
 	}

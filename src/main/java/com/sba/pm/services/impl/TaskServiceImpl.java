@@ -25,12 +25,8 @@ public class TaskServiceImpl implements ITaskService {
 	UserDaoImpl userDao;
 	
 	@Override
-	public Integer saveOrUpadte(TaskEntity taskEntity) {
-		Integer result = taskDao.saveOrUpadte(taskEntity);
-//		UserEntity userEntity = taskEntity.getUserEntity();
-//		if(result > 0 && userEntity!= null) {
-//			userDao.updateTask(taskEntity);
-//		}
+	public Integer saveOrUpdateTask(TaskEntity taskEntity) {
+		Integer result = taskDao.saveOrUpdateTask(taskEntity);
 		return result;
 	}
 
@@ -40,13 +36,13 @@ public class TaskServiceImpl implements ITaskService {
 		}
 
 	@Override
-	public List<TaskEntity> view() {
-		return taskDao.view();
+	public List<TaskEntity> getAllTasks() {
+		return taskDao.getAllTasks();
 		}
 
 	@Override
-	public Integer delete(Integer id) {
-		return taskDao.delete(id);
+	public Integer deleteTask(Integer id) {
+		return taskDao.deleteTask(id);
 		}
 
 

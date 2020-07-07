@@ -22,7 +22,7 @@ public class ParentTaskController {
 	@Autowired
 	private  ParentTaskServiceImpl parentTaskService;
 
-	@PostMapping("/parentTask/saveorupdate")
+	@PostMapping("/parentTask/saveOrUpdateParentTask")
 	public Integer createOrUpdate(@RequestBody ParentTaskEntity parentTaskEntity) {
 		return parentTaskService.saveOrUpadte(parentTaskEntity);
 	}
