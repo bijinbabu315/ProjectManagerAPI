@@ -14,6 +14,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name="task")
@@ -50,6 +51,7 @@ public class TaskEntity {
 		
 		@OneToOne(mappedBy = "taskEntity")
 		@JsonIgnoreProperties(value = { "userEntity", "taskEntity" }, allowSetters = true)
+		@JsonProperty("user")
 		private UserEntity userEntity;
 
 		public Integer getId() {

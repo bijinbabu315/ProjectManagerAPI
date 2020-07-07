@@ -12,6 +12,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name="user")
@@ -38,6 +39,7 @@ public class UserEntity {
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="task_id")
+	@JsonProperty("task")
 	@JsonIgnoreProperties(value = { "userEntity", "project" }, allowSetters = true)
 	private TaskEntity taskEntity;
 	

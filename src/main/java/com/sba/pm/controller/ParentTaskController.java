@@ -34,7 +34,7 @@ public class ParentTaskController {
 		
 	}
 	
-	@GetMapping("/parentTask/getAllParentTask")
+	@GetMapping("/parentTask/getAllParentTasks")
 	public List<ParentTaskEntity> getAllParentTask(){
 		return parentTaskService.getAllParentTask();
 		
