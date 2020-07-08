@@ -39,7 +39,7 @@ public class UserEntity {
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="task_id")
-	@JsonProperty("task")
+//	@JsonProperty("task")
 	@JsonIgnoreProperties(value = { "userEntity", "project" }, allowSetters = true)
 	private TaskEntity taskEntity;
 	

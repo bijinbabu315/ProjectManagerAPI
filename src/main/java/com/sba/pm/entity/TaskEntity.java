@@ -50,8 +50,8 @@ public class TaskEntity {
 		private Integer status;
 		
 		@OneToOne(mappedBy = "taskEntity")
-		@JsonIgnoreProperties(value = { "userEntity", "taskEntity" }, allowSetters = true)
-		@JsonProperty("user")
+		@JsonIgnoreProperties(value = { "projectData", "taskEntity" }, allowSetters = true)
+//		@JsonProperty("user")
 		private UserEntity userEntity;
 
 		public Integer getId() {

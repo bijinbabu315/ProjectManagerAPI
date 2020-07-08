@@ -46,7 +46,7 @@ public class ProjectEntity {
 	private  List<UserEntity> user;
 	
 	@OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
-	@JsonIgnoreProperties(value = { "userEntity", "project" }, allowSetters = true)
+	@JsonIgnoreProperties(value = { "user", "project" }, allowSetters = true)
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<TaskEntity> task;
 
