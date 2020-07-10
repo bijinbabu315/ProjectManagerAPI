@@ -41,10 +41,5 @@ public class TaskServiceImpl implements ITaskService {
 		return taskDao.getAllTasks();
 		}
 
-	@Override
-	public Integer deleteTask(Integer id) {
-		return taskDao.deleteTask(id);
-		}
-
 
 }

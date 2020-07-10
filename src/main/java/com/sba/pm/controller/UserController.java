@@ -40,7 +40,7 @@ public class UserController {
 
 	
 	@PostMapping("/user/updateProjectInUser")
-	public Integer getUser(@RequestBody ProjectEntity projectEntity) {
+	public Integer updateProjectInUser(@RequestBody ProjectEntity projectEntity) {
 		return userService.updateProjectInUser(projectEntity);
 		
 		

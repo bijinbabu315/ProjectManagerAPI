@@ -51,25 +51,6 @@ public class TaskDaoImpl implements ITaskDao {
 	}
 
 	@Override
-	public TaskEntity getTask(Integer id) {
-		TaskEntity task=null;
-		SessionFactory sessionFactory = entityManagerFactory.unwrap(SessionFactory.class);
-		Session session=null;
-		try {
-			session=sessionFactory.openSession();
-			Transaction beginTransaction = session.beginTransaction();
-			task = (TaskEntity)session.get(TaskEntity.class, id);
-			beginTransaction.commit();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			session.close();
-		}
-		
-		return task;
-	}
-
-	@Override
 	public List<TaskEntity> getAllTasks() {
 		List<TaskEntity> results=new ArrayList<>();
 		SessionFactory sessionFactory = entityManagerFactory.unwrap(SessionFactory.class);
@@ -93,22 +74,4 @@ public class TaskDaoImpl implements ITaskDao {
 		return results;
 	}
 
-	@Override
-	public Integer deleteTask(Integer id) {
-		SessionFactory sessionFactory = entityManagerFactory.unwrap(SessionFactory.class);
-		Session session=null;
-		try {
-			session=sessionFactory.openSession();
-			Transaction beginTransaction = session.beginTransaction();
-			TaskEntity task = (TaskEntity)session.get(TaskEntity.class, id);
-			session.delete(task);
-			beginTransaction.commit();
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			session.close();
-		}
-		return null;
-	}
 }

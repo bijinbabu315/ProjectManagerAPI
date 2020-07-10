@@ -10,5 +10,4 @@ public interface ITaskService {
 
 	public List<TaskEntity> getAllTasks();
 
-	public Integer deleteTask(Integer id);
 }
