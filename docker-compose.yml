@@ -1,0 +1,24 @@
+version: '3'
+services:
+
+  projectmanagermysqldb:
+    image: mysql:8
+    networks:
+      - projectmanager-mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=pass@word1
+      - MYSQL_DATABASE=pmsdb 
+
+  projectmanager-service:
+    image: projectmanagerapi
+    ports:
+      - "8090:8090"
+    networks:
+      - projectmanager-mysql
+    depends_on:
+      - projectmanagermysqldb
+ 
+
+
+networks:
+  projectmanager-mysql:
