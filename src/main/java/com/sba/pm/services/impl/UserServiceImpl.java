@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sba.pm.dao.impl.UserDaoImpl;
-import com.sba.pm.entity.TaskEntity;
+import com.sba.pm.entity.ProjectEntity;
 import com.sba.pm.entity.UserEntity;
 import com.sba.pm.services.intf.IUserService;
 
@@ -22,8 +22,8 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	@Override
-	public UserEntity getUser(Integer id) {
-		return userDao.getUser(id);
+	public Integer updateProjectInUser(ProjectEntity projectEntity) {
+		return userDao.updateProjectInUser(projectEntity);
 	}
 
 	@Override

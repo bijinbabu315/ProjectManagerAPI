@@ -5,9 +5,8 @@ import java.util.List;
 import com.sba.pm.entity.ProjectEntity;
 
 public interface IProjectDao {
+	
 	public Integer saveOrUpdateProject(ProjectEntity projectEntity);
-
-	public ProjectEntity getProject(Integer id);
 
 	public List<ProjectEntity> getAllProjects();
 

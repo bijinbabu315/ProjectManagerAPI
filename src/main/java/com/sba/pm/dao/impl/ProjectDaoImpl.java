@@ -1,7 +1,6 @@
 package com.sba.pm.dao.impl;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.EntityManagerFactory;
@@ -18,7 +17,6 @@ import org.springframework.stereotype.Repository;
 
 import com.sba.pm.dao.intf.IProjectDao;
 import com.sba.pm.entity.ProjectEntity;
-import com.sba.pm.entity.UserEntity;
 
 @Repository("projectDao")
 public class ProjectDaoImpl implements IProjectDao {
@@ -46,25 +44,6 @@ public class ProjectDaoImpl implements IProjectDao {
 		}
 
 		return result;
-	}
-
-	@Override
-	public ProjectEntity getProject(Integer id) {
-		ProjectEntity project = null;
-		SessionFactory sessionFactory = entityManagerFactory.unwrap(SessionFactory.class);
-		Session session = null;
-		try {
-			session = sessionFactory.openSession();
-			Transaction beginTransaction = session.beginTransaction();
-			project = (ProjectEntity) session.get(ProjectEntity.class, id);
-			beginTransaction.commit();
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			session.close();
-		}
-
-		return project;
 	}
 
 	@Override

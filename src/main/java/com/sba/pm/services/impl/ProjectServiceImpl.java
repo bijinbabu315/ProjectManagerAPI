@@ -33,11 +33,6 @@ public class ProjectServiceImpl implements IProjectService {
 		
 		return result;
 	}
-	
-	@Override
-	public ProjectEntity getProject(Integer id) {
-		return projectDao.getProject(id);
-	}
 
 	@Override
 	public List<ProjectEntity> getAllProjects() {

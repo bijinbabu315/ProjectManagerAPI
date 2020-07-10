@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sba.pm.entity.TaskEntity;
-import com.sba.pm.services.impl.ParentTaskServiceImpl;
 import com.sba.pm.services.impl.TaskServiceImpl;
 
 
@@ -26,13 +25,6 @@ public class TaskController {
 	@PostMapping("/task/saveOrUpdateTask")
 	public Integer createOrUpdate(@RequestBody TaskEntity task) {
 		return taskService.saveOrUpdateTask(task);
-	}
-	
-	@GetMapping("/task/getTask/{id}")
-	public TaskEntity getTask(@PathVariable String id) {
-		return taskService.getTask(Integer.parseInt(id));
-		
-		
 	}
 	
 	@GetMapping("/task/getAllTasks")

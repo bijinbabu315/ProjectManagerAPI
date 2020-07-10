@@ -20,18 +20,9 @@ public class ParentTaskServiceImpl implements IParentTaskService {
 	}
 
 	@Override
-	public ParentTaskEntity getTaskById(Integer id) {
-		return parentTaskDao.getTaskById(id);
-	}
-
-	@Override
 	public List<ParentTaskEntity> getAllParentTask() {
 		return parentTaskDao.getAllParentTask();
 	}
 
-	@Override
-	public Integer deleteTaskById(Integer id) {
-		return parentTaskDao.deleteTaskById(id);
-	}
 
 }

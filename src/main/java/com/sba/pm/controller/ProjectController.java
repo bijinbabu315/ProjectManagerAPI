@@ -27,13 +27,6 @@ public class ProjectController {
 		return projectService.saveOrUpdateProject(projectEntity);
 	}
 	
-	@GetMapping("/project/getProject/{id}")
-	public ProjectEntity getProject(@PathVariable String id) {
-		return projectService.getProject(Integer.parseInt(id));
-		
-		
-	}
-	
 	@GetMapping("/project/getAllProjects")
 	public List<ProjectEntity> getAllProjects(){
 		return projectService.getAllProjects();

@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,7 +15,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name="task")
@@ -24,15 +24,6 @@ public class TaskEntity {
 		@Column(name="task_id")
 		@GeneratedValue(strategy = GenerationType.IDENTITY )
 		private Integer id;
-		
-		@ManyToOne(cascade = CascadeType.ALL)
-		@JoinColumn(name="parent_id")
-		private ParentTaskEntity parentTask;
-		
-		@ManyToOne(cascade = CascadeType.ALL)
-		@JoinColumn(name="project_id")
-		@JsonIgnoreProperties(value = { "user", "task" }, allowSetters = true)
-		private ProjectEntity project;
 		
 		@Column(name="task")
 		private String task;
@@ -49,10 +40,18 @@ public class TaskEntity {
 		@Column(name="status")
 		private Integer status;
 		
-		@OneToOne(mappedBy = "taskEntity")
-		@JsonIgnoreProperties(value = { "projectData", "taskEntity" }, allowSetters = true)
-//		@JsonProperty("user")
-		private UserEntity userEntity;
+		@OneToOne(mappedBy = "taskData")
+		@JsonIgnoreProperties(value = { "projectData", "taskData" }, allowSetters = true)
+		private UserEntity userData;
+
+		@ManyToOne(cascade = CascadeType.ALL)
+		@JoinColumn(name="parent_id")
+		private ParentTaskEntity parentTask;
+		
+		@ManyToOne(cascade = CascadeType.ALL, fetch= FetchType.EAGER)
+		@JoinColumn(name="project_id")
+		@JsonIgnoreProperties(value = { "user", "task" }, allowSetters = true)
+		private ProjectEntity projectEntity;
 
 		public Integer getId() {
 			return id;
@@ -68,14 +67,6 @@ public class TaskEntity {
 
 		public void setParentTask(ParentTaskEntity parentTask) {
 			this.parentTask = parentTask;
-		}
-
-		public ProjectEntity getProject() {
-			return project;
-		}
-
-		public void setProject(ProjectEntity project) {
-			this.project = project;
 		}
 
 		public String getTask() {
@@ -118,13 +109,20 @@ public class TaskEntity {
 			this.status = status;
 		}
 
-		public UserEntity getUserEntity() {
-			return userEntity;
+		public UserEntity getUserData() {
+			return userData;
 		}
 
-		public void setUserEntity(UserEntity userEntity) {
-			this.userEntity = userEntity;
+		public void setUserData(UserEntity userData) {
+			this.userData = userData;
 		}
 
-	
+		public ProjectEntity getProjectEntity() {
+			return projectEntity;
+		}
+
+		public void setProjectEntity(ProjectEntity projectEntity) {
+			this.projectEntity = projectEntity;
+		}
+
 }

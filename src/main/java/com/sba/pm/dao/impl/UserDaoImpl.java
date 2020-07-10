@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.CriteriaUpdate;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
@@ -16,7 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.sba.pm.dao.intf.IUserDao;
-import com.sba.pm.entity.TaskEntity;
+import com.sba.pm.entity.ProjectEntity;
 import com.sba.pm.entity.UserEntity;
 
 @Repository("userDao")
@@ -47,45 +48,33 @@ public class UserDaoImpl implements IUserDao {
 	}
 
 	@Override
-	public UserEntity getUser(Integer id) {
-		UserEntity user = null;
+	public Integer updateProjectInUser(ProjectEntity projectEntity) {
+		Integer result = 0;
 		SessionFactory sessionFactory = entityManagerFactory.unwrap(SessionFactory.class);
 		Session session = null;
+		String newValue = null;
 		try {
 			session = sessionFactory.openSession();
 			Transaction beginTransaction = session.beginTransaction();
-			user = (UserEntity) session.get(UserEntity.class, id);
+			CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+			CriteriaUpdate<UserEntity> criteriaUpdate = criteriaBuilder.createCriteriaUpdate(UserEntity.class);
+			Root<UserEntity> root = criteriaUpdate.from(UserEntity.class);
+			criteriaUpdate.set(root.get("taskData"), newValue);
+			criteriaUpdate.set(root.get("isManager"), newValue);
+			criteriaUpdate.set(root.get("projectData"), newValue);
+			criteriaUpdate.where(root.get("projectData").in(projectEntity));
+			session.createQuery(criteriaUpdate).executeUpdate();
+			result = 1;
 			beginTransaction.commit();
 		} catch (Exception e) {
+			result = 0;
 			e.printStackTrace();
 		} finally {
 			session.close();
 		}
 
-		return user;
+		return result;
 	}
-
-//	public Integer updateTask(Integer id, TaskEntity taskEntity) {
-//		int result = 0;
-//		SessionFactory sessionFactory = entityManagerFactory.unwrap(SessionFactory.class);
-//		Session session = null;
-//		try {
-//			session = sessionFactory.openSession();
-//
-//			Transaction tx = session.beginTransaction();
-//			UserEntity userEntity = session.load(UserEntity.class, id);
-//			userEntity.setTaskEntity(taskEntity);
-//			session.update(userEntity);
-//			result = 1;
-//			tx.commit();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		} finally {
-//			result = 0;
-//			session.close();
-//		}
-//		return result;
-//	}
 
 	@Override
 	public List<UserEntity> getAllUsers() {

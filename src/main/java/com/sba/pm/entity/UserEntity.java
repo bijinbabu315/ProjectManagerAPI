@@ -12,38 +12,37 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
-@Table(name="user")
+@Table(name = "user")
+@JsonIgnoreProperties(value = { "taskData" }, allowSetters = true)
 public class UserEntity {
 
 	@Id
-	@Column(name="user_id")
+	@Column(name = "user_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
-	@Column(name="firstname")
+
+	@Column(name = "firstname")
 	private String firstName;
-	
-	@Column(name="lastname")
+
+	@Column(name = "lastname")
 	private String lastName;
-	
-	@Column(name="emp_id")
-	private String employeeId;
-	
+
+	@Column(name = "emp_id")
+	private Long employeeId;
+
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="project_id")
+	@JoinColumn(name = "project_id")
 	@JsonIgnoreProperties(value = { "user", "task" }, allowSetters = true)
 	private ProjectEntity projectData;
-	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="task_id")
-//	@JsonProperty("task")
-	@JsonIgnoreProperties(value = { "userEntity", "project" }, allowSetters = true)
-	private TaskEntity taskEntity;
-	
-	@Column(name="isManager")
+
+	@OneToOne
+	@JoinColumn(name = "task_id")
+//	@JsonIgnoreProperties(value = { "userData", "projectEntity" }, allowSetters = true)
+	private TaskEntity taskData;
+
+	@Column(name = "isManager")
 	private Integer isManager;
 
 	public Integer getIsManager() {
@@ -78,14 +77,6 @@ public class UserEntity {
 		this.lastName = lastName;
 	}
 
-	public String getEmployeeId() {
-		return employeeId;
-	}
-
-	public void setEmployeeId(String employeeId) {
-		this.employeeId = employeeId;
-	}
-
 	public ProjectEntity getProjectData() {
 		return projectData;
 	}
@@ -94,15 +85,20 @@ public class UserEntity {
 		this.projectData = projectData;
 	}
 
-	public TaskEntity getTaskEntity() {
-		return taskEntity;
+	public TaskEntity getTaskData() {
+		return taskData;
 	}
 
-	public void setTaskEntity(TaskEntity taskEntity) {
-		this.taskEntity = taskEntity;
+	public void setTaskData(TaskEntity taskData) {
+		this.taskData = taskData;
 	}
 
+	public Long getEmployeeId() {
+		return employeeId;
+	}
 
-
+	public void setEmployeeId(Long employeeId) {
+		this.employeeId = employeeId;
+	}
 
 }

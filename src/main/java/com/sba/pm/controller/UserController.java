@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sba.pm.entity.ProjectEntity;
 import com.sba.pm.entity.UserEntity;
 import com.sba.pm.services.impl.UserServiceImpl;
 
@@ -26,13 +27,6 @@ public class UserController {
 		return userService.saveOrUpdateUser(userEntity);
 	}
 	
-	@GetMapping("/user/getUser/{id}")
-	public UserEntity getUser(@PathVariable String id) {
-		return userService.getUser(Integer.parseInt(id));
-		
-		
-	}
-	
 	@GetMapping("/user/getAllUsers")
 	public List<UserEntity> getAllUsers(){
 		return userService.getAllUsers();
@@ -44,4 +38,11 @@ public class UserController {
 		return userService.deleteUser(Integer.parseInt(id));
 	}
 
+	
+	@PostMapping("/user/updateProjectInUser")
+	public Integer getUser(@RequestBody ProjectEntity projectEntity) {
+		return userService.updateProjectInUser(projectEntity);
+		
+		
+	}
 }

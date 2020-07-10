@@ -11,7 +11,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.LazyCollection;
@@ -21,6 +20,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="project")
+@JsonIgnoreProperties(value = { "task" }, allowSetters = true)
 public class ProjectEntity {
 	
 	@Id
@@ -40,14 +40,12 @@ public class ProjectEntity {
 	@Column(name="priority")
 	private Integer priority;
 
-	@OneToMany(mappedBy = "projectData", cascade = CascadeType.ALL)
-	@JsonIgnoreProperties(value = { "projectData", "taskEntity" }, allowSetters = true)
-	@LazyCollection(LazyCollectionOption.FALSE)
+	@OneToMany(mappedBy = "projectData", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JsonIgnoreProperties(value = { "projectData", "taskData" }, allowSetters = true)
 	private  List<UserEntity> user;
 	
-	@OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
-	@JsonIgnoreProperties(value = { "user", "project" }, allowSetters = true)
-	@LazyCollection(LazyCollectionOption.FALSE)
+	@OneToMany(mappedBy = "projectEntity", cascade = CascadeType.ALL)
+	@JsonIgnoreProperties(value = { "userData", "projectEntity" }, allowSetters = true)
 	private List<TaskEntity> task;
 
 	public Integer getId() {

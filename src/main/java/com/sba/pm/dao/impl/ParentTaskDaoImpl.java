@@ -46,24 +46,6 @@ public class ParentTaskDaoImpl implements IParentTaskDao {
 		return result;
 	}
 
-	@Override
-	public ParentTaskEntity getTaskById(Integer id) {
-		ParentTaskEntity parentTaskEntity = null;
-		SessionFactory sessionFactory = entityManagerFactory.unwrap(SessionFactory.class);
-		Session session = null;
-		try {
-			session = sessionFactory.openSession();
-			Transaction beginTransaction = session.beginTransaction();
-			parentTaskEntity = (ParentTaskEntity) session.get(ParentTaskEntity.class, id);
-			beginTransaction.commit();
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			session.close();
-		}
-
-		return parentTaskEntity;
-	}
 
 	@Override
 	public List<ParentTaskEntity> getAllParentTask() {
@@ -87,22 +69,4 @@ public class ParentTaskDaoImpl implements IParentTaskDao {
 		return results;
 	}
 
-	@Override
-	public Integer deleteTaskById(Integer id) {
-		SessionFactory sessionFactory = entityManagerFactory.unwrap(SessionFactory.class);
-		Session session = null;
-		try {
-			session = sessionFactory.openSession();
-			Transaction beginTransaction = session.beginTransaction();
-			ParentTaskEntity parentTaskEntity = (ParentTaskEntity) session.get(ParentTaskEntity.class, id);
-			session.delete(parentTaskEntity);
-			beginTransaction.commit();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			session.close();
-		}
-		return null;
-	}
 }
