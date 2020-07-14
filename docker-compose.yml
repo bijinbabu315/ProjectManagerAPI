@@ -17,7 +17,15 @@ services:
       - projectmanager-mysql
     depends_on:
       - projectmanagermysqldb
- 
+      
+  projectmanagerui:
+    image: projectmanagerui
+    ports:
+      - "4200:4200"
+    networks:
+      - projectmanager-mysql
+    depends_on:
+      - projectmanager-service
 
 
 networks:
